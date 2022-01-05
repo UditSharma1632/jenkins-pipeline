@@ -1,7 +1,7 @@
 node {
     stage('Preparation') { // for display purposes
         // Get some code from a GitHub repository and see if poll scm is working or not
-        git 'https://github.com/UditSharma1632/jenkins.git'
+        git 'https://github.com/UditSharma1632/pipeline.git'
         
     }
     stage('Build and Package') {
