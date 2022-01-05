@@ -1,0 +1,68 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.jenkins.nexus</groupId>
+  <artifactId>nexus-jenkins</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+  <name>nexus-jenkins</name>
+  
+  <properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.java.version>1.8</project.java.version>
+	</properties>
+	
+  <distributionManagement>
+	  <snapshotRepository>
+      <id>nexus</id>
+      <url>http://host.docker.internal:8110/repository/maven-central-repository/</url>
+    </snapshotRepository>
+    <repository>
+      <id>nexus</id>
+      <url>http://host.docker.internal:8110/repository/maven-central-repository/</url>
+    </repository>
+    
+  </distributionManagement>
+  
+  <build>
+    <!-- To define the plugin version in your parent POM -->
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>3.3.2</version>
+        </plugin>
+        <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-war-plugin</artifactId>
+    <executions>
+        <execution>
+            <phase>package</phase>
+            <configuration>
+                <attachClasses>true</attachClasses>
+                <webXml>${basedir}/src/main/webapp/WEB-INF/web.xml</webXml>
+            </configuration>
+            <goals>
+                <goal>inplace</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
+    
+      </plugins>
+      
+    </pluginManagement>
+ 
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.3.2</version>
+      </plugin>
+    
+    </plugins>
+  </build>
+  
+</project>
