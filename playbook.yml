@@ -29,4 +29,4 @@
    - name: Start Service
      systemd:
        name: demo-latest.jar
-       state: started
+       state: restarted
