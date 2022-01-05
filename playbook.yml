@@ -1,0 +1,23 @@
+- hosts: all
+  tasks:
+    - maven_artifact:
+        group_id: com.example
+        artifact_id: demo
+        repository_url: 'http://host.docker.internal:8110/repository/full-pipeline/'
+        username: admin
+        password: November@2021
+        dest: /download
+
+  tasks:
+   - name: Update APT package manager repositories cache
+     become: true
+     apt:
+      update_cache: yes
+   - name: Install Java using Ansible
+     become: yes
+     apt:
+      name: "{{packages}}"
+      state: present
+     vars:
+      packages:
+         - openjdk-8-jdk
