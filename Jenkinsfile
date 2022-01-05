@@ -9,9 +9,9 @@ node {
     }
      
     stage('Nexus') {
-        nexusArtifactUploader artifacts: [[artifactId: 'id', classifier: '', file: 'target/jenkins-1.0.0.jar', type: 'jar']], 
-            credentialsId: 'Nexus', groupId: 'com.example', nexusUrl: 'host.docker.internal:8110', nexusVersion: 'nexus3', 
-            protocol: 'http', repository: 'full-pipeline', version: '0.0.1-SNAPSHOT'
+        nexusArtifactUploader artifacts: [[artifactId: 'demo', classifier: '', file: 'target/demo-0.0.1.jar', type: 'jar']],
+            credentialsId: 'nexus3', groupId: 'com.example', nexusUrl: 'host.docker.internal:8110', 
+            nexusVersion: 'nexus3', protocol: 'http', repository: 'full-pipeline', version: '0.0.1'
     }
     
     stage('Executing Playbook') { 
