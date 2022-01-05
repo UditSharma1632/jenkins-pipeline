@@ -1,4 +1,4 @@
-- hosts: all
+- hosts: 172.17.0.2
   tasks:
     - maven_artifact:
         group_id: com.example
@@ -7,7 +7,8 @@
         username: admin
         password: November@2021
         dest: /download
-
+        
+- hosts: 172.17.0.2
   tasks:
    - name: Update APT package manager repositories cache
      become: true
