@@ -14,6 +14,10 @@ node {
             nexusVersion: 'nexus3', protocol: 'http', repository: 'full-pipeline', version: '0.0.1'
     }
     
+    stage('Deploy') {
+                sh "mvn deploy"
+    }
+    
     stage('Executing Playbook') { 
                 ansiblePlaybook (credentialsId: 'id_rsa', disableHostKeyChecking: true,
                                  installation: 'ansible', inventory: 'inventory.inv', playbook: 'playbook.yml')
