@@ -26,4 +26,4 @@
 - hosts: 172.17.0.2
   tasks:
     - name: Start Service
-      shell: /download/demo-latest.jar/bin/java -jar
+      shell: java -jar /download/demo-latest.jar
