@@ -22,11 +22,3 @@
      vars:
       packages:
          - openjdk-8-jdk
-         
-         
-- hosts: 172.17.0.2
-  tasks:
-   - name: Start Service
-     systemd:
-       name: demo-latest.jar
-       state: restarted
