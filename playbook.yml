@@ -1,5 +1,12 @@
 - hosts: 172.17.0.5
   tasks:
+   - name: creates directory
+     file:
+       path: /download
+       state: directory
+
+- hosts: 172.17.0.5
+  tasks:
     - maven_artifact:
         group_id: com.example
         artifact_id: demo
