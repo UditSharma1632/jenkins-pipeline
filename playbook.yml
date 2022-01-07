@@ -33,7 +33,7 @@
          
 - hosts: 172.17.0.5
   vars:
-    app_name: demo-latest
+    app_name: demo-0.0.1
 
   tasks:
    - name: create service file
