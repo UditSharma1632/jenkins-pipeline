@@ -13,11 +13,11 @@
   tasks:
    - name: Update APT package manager repositories cache
      become: true
-     apt:
+     yum:
       update_cache: yes
    - name: Install Java using Ansible
      become: yes
-     apt:
+     yum:
       name: "{{packages}}"
       state: present
      vars:
