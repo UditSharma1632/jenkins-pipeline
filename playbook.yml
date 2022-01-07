@@ -3,7 +3,7 @@
     - maven_artifact:
         group_id: com.example
         artifact_id: demo
-        version: latest
+        version: 0.0.1
         repository_url: 'http://host.docker.internal:8110/repository/full-pipeline/'
         username: admin
         password: November@2021
