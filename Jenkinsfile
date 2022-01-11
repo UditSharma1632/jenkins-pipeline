@@ -2,6 +2,7 @@ node {
     stage('Preparation') { // for display purposes
         // Get some code from a GitHub repository and see if poll scm is working or not
         git branch: 'developer', url: 'https://github.com/UditSharma1632/pipeline.git'
+        echo 'Pulling...' + env.BRANCH_NAME
         
     }
     stage('Build and Package') {
