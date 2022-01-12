@@ -51,7 +51,7 @@ pipeline {
           nexusUrl: 'host.docker.internal:8110', nexusVersion: 'nexus3',
           protocol: 'http',
           repository: 'snapshot',
-          version: readMavenPom().getVersion()
+          version: '${pom.version}'
       }
     }
 
