@@ -44,14 +44,14 @@ pipeline {
       steps {
         nexusArtifactUploader artifacts: [
             [artifactId: 'demo',
-              classifier: '', file: 'target/demo-0.0.1.jar',
+              classifier: '', file: 'target/demo-0.0.1-SNAPSHOT.jar',
               type: 'jar'
             ]
           ], credentialsId: 'nexus3', groupId: 'com.example',
           nexusUrl: 'host.docker.internal:8110', nexusVersion: 'nexus3',
           protocol: 'http',
           repository: 'snapshot',
-          version: '0.0.1'
+          version: '0.0.1-SNAPSHOT'
       }
     }
 
