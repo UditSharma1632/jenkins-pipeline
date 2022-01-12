@@ -18,11 +18,6 @@ pipeline {
       }
     }
 
-    stage('Versioning') {
-       steps {
-         echo "${VERSION}"
-      }
-    }
     
     stage('Build') {
 //       when {
