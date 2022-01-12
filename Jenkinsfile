@@ -1,6 +1,6 @@
 pipeline {
   agent any
-  enviornment
+  envoirnment
   { 
     VERSION = readMavenPom().getVersion()
   }
