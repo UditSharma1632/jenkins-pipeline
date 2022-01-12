@@ -27,11 +27,11 @@
   <distributionManagement>
 	  <snapshotRepository>
       <id>nexus</id>
-      <url>http://host.docker.internal:8110/repository/full-pipeline/</url>
+      <url>http://host.docker.internal:8110/repository/snapshot/</url>
     </snapshotRepository>
     <repository>
       <id>nexus</id>
-      <url>http://host.docker.internal:8110/repository/full-pipeline/</url>
+      <url>http://host.docker.internal:8110/repository/snapshot/</url>
     </repository>
     
   </distributionManagement>
