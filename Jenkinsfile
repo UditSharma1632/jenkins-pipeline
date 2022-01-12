@@ -1,14 +1,7 @@
 pipeline {
   agent any
   stages {
-    stage('Git-checkout') { // for display purposes
-      when {
-        not {
-          branch 'master'
-        }
-      }
       steps {
-        git branch: env.BRANCH_NAME,
           url: 'https://github.com/UditSharma1632/pipeline.git'
       }
     }
