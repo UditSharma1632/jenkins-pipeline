@@ -42,6 +42,7 @@ pipeline {
 //         }
 //       }
       steps {
+         def pom = readMavenPom file: 'pom.xml'
         nexusArtifactUploader artifacts: [
             [artifactId: 'demo',
               classifier: '', file: 'target/demo-0.0.1-SNAPSHOT.jar',
@@ -54,6 +55,7 @@ pipeline {
           version: '${pom.version}'
       }
     }
+    
 
     stage('ansible-deploy') {
       when {
