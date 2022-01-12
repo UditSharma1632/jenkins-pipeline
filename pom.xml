@@ -22,19 +22,21 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-		
-	</dependencies>
+		</dependencies>
+	
   <distributionManagement>
-	  <snapshotRepository>
-      <id>nexus</id>
-      <url>http://host.docker.internal:8110/repository/snapshot/</url>
-    </snapshotRepository>
-    <repository>
-      <id>nexus</id>
-      <url>http://host.docker.internal:8110/repository/snapshot/</url>
-    </repository>
-    
-  </distributionManagement>
+  <repository>
+    <id>release</id>
+    <name>release</name>
+    <url>http://host.docker.internal:8110/repository/release/</url>
+  </repository>
+  <snapshotRepository>
+    <id>snapshots</id>
+    <name>snapshots</name>
+    <url>http://host.docker.internal:8110/repository/snapshot/</url>
+  </snapshotRepository>
+</distributionManagement>
+
 
 
 	<build>
