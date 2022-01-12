@@ -1,5 +1,10 @@
 pipeline {
   agent any
+  enviornment
+  { 
+    VERSION = readMavenPom().getVersion()
+  }
+  
   stages {
     stage('Git-checkout') { // for display purpose
       when {
@@ -13,6 +18,12 @@ pipeline {
       }
     }
 
+    stage('Versioning') {
+       steps {
+         echo "${VERSION}"
+      }
+    }
+    
     stage('Build') {
 //       when {
 //         anyOf {
@@ -42,7 +53,6 @@ pipeline {
 //         }
 //       }
       steps {
-         def pom = readMavenPom file: 'pom.xml'
         nexusArtifactUploader artifacts: [
             [artifactId: 'demo',
               classifier: '', file: 'target/demo-0.0.1-SNAPSHOT.jar',
@@ -52,7 +62,7 @@ pipeline {
           nexusUrl: 'host.docker.internal:8110', nexusVersion: 'nexus3',
           protocol: 'http',
           repository: 'snapshot',
-          version: '${pom.version}'
+          version: "${VERSION}"
       }
     }
     
