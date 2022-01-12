@@ -14,33 +14,33 @@ pipeline {
     }
 
     stage('Build') {
-      when {
-        anyOf {
-          branch 'env.BRANCH_NAME/*'
-        }
-      }
+//       when {
+//         anyOf {
+//           branch 'env.BRANCH_NAME/*'
+//         }
+//       }
       steps {
         sh "mvn clean test"
       }
     }
 
     stage('Package') {
-      when {
-        anyOf {
-          branch 'env.BRANCH_NAME/*'
-        }
-      }
+//       when {
+//         anyOf {
+//           branch 'env.BRANCH_NAME/*'
+//         }
+//       }
       steps {
         sh "mvn package"
       }
     }
 
     stage('Nexus') {
-      when {
-        anyOf {
-          branch 'env.BRANCH_NAME/*'
-        }
-      }
+//       when {
+//         anyOf {
+//           branch 'env.BRANCH_NAME/*'
+//         }
+//       }
       steps {
         nexusArtifactUploader artifacts: [
             [artifactId: 'demo',
