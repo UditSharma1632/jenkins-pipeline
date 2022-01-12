@@ -36,11 +36,6 @@ pipeline {
     }
 
     stage('Nexus') {
-      when {
-        anyOf {
-          branch 'env.BRANCH_NAME/*'
-        }
-      }
       steps {
         nexusArtifactUploader artifacts: [
             [artifactId: 'demo',
@@ -50,7 +45,7 @@ pipeline {
           ], credentialsId: 'nexus3', groupId: 'com.example',
           nexusUrl: 'host.docker.internal:8110', nexusVersion: 'nexus3',
           protocol: 'http',
-          repository: 'full-pipeline',
+          repository: 'release',
           version: '0.0.1'
       }
     }
