@@ -53,7 +53,6 @@ pipeline {
           repository: 'snapshot',
           version: readMavenPom().getVersion()
       }
-      echo "${version}"
     }
 
     stage('ansible-deploy') {
