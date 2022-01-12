@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-    stage('Git-checkout') { // for display purposes
+    stage('Git-checkout') { // for display purpose
       when {
         not {
           branch 'master'
