@@ -56,7 +56,7 @@ pipeline {
           ], credentialsId: 'nexus3', groupId: 'com.example',
           nexusUrl: 'host.docker.internal:8110', nexusVersion: 'nexus3',
           protocol: 'http',
-          repository: 'snapshot',
+          repository: 'hotfix',
           version: "${VERSION}"
       }
     }
