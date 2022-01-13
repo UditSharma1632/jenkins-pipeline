@@ -63,13 +63,13 @@ pipeline {
     
 
     stage('ansible-deploy') {
-      when {
-        anyOf {
-          branch 'env.BRANCH_NAME/*'
-        }
-      }
+//       when {
+//         anyOf {
+//           branch 'env.BRANCH_NAME/*'
+//         }
+//       }
       steps {
-        ansiblePlaybook(credentialsId: 'id_rsa', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory.inv', playbook: 'plabook.yml')
+        ansiblePlaybook(credentialsId: 'id_rsa', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory.inv', playbook: 'playbook.yml')
       }
     }
   }
