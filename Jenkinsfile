@@ -6,7 +6,7 @@ pipeline {
   }
   
   stages {
-    stage('Git-checkout') { // for display purpose
+    stage('Git-checkout') { // for display purposes
       when {
         not {
           branch 'master'
