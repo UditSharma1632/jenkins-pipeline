@@ -1,22 +1,22 @@
-- hosts: 172.17.0.2
+- hosts: release
   tasks:
    - name: creates directory
      file:
        path: /download
        state: directory
 
-- hosts: 172.17.0.2
+- hosts: release
   tasks:
     - maven_artifact:
         group_id: com.example
         artifact_id: demo
         version: 0.0.1
-        repository_url: 'http://host.docker.internal:8110/repository/full-pipeline/'
+        repository_url: 'http://host.docker.internal:8110/repository/release/'
         username: admin
         password: November@2021
         dest: /download
         
-- hosts: 172.17.0.2
+- hosts: release
   tasks:
    - name: Update APT package manager repositories cache
      become: true
@@ -31,7 +31,7 @@
       packages:
          - java-1.8.0-openjdk.x86_64
          
-- hosts: 172.17.0.2
+- hosts: release
   vars:
     app_name: demo-0.0.1
 
