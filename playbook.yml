@@ -11,6 +11,7 @@
         group_id: com.example
         artifact_id: demo
         repository_url: 'http://host.docker.internal:8110/repository/snapshot/'
+        version: 0.0.1-SNAPSHOT
         username: admin
         password: November@2021
         dest: /download
