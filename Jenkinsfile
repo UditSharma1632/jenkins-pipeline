@@ -1,13 +1,12 @@
 pipeline {
   agent any
-  
   environment
   { 
     VERSION = readMavenPom().getVersion()
   }
   
   stages {
-    stage('Git-checkout') { // for display purposes
+    stage('Git-checkout') { // for display purpose
       when {
         not {
           branch 'master'
@@ -19,12 +18,13 @@ pipeline {
       }
     }
 
+    
     stage('Build') {
 //       when {
 //         anyOf {
 //           branch 'env.BRANCH_NAME/*'
 //         }
-//       } 
+//       }
       steps {
         sh "mvn clean test"
       }
@@ -42,10 +42,33 @@ pipeline {
     }
 
     stage('Nexus') {
+//       when {
+//         anyOf {
+//           branch 'env.BRANCH_NAME/*'
+//         }
+//       }
       steps {
+        script {
+                    if (env.BRANCH_NAME == 'develop') {
+                        echo 'I only execute on the master branch' 
+                
         nexusArtifactUploader artifacts: [
             [artifactId: 'demo',
-              classifier: '', file: 'target/demo-0.0.1.jar',
+              classifier: '', file: 'target/demo-0.0.1-SNAPSHOT.jar',
+              type: 'jar'
+            ]
+          ], credentialsId: 'nexus3', groupId: 'com.example',
+          nexusUrl: 'host.docker.internal:8110', nexusVersion: 'nexus3',
+          protocol: 'http',
+          repository: 'snapshot',
+          version: "${VERSION}"
+                    }
+          
+          else {
+                        echo 'I execute elsewhere'
+             nexusArtifactUploader artifacts: [
+            [artifactId: 'demo',
+              classifier: '', file: 'target/demo-0.0.1-RELEASE.jar',
               type: 'jar'
             ]
           ], credentialsId: 'nexus3', groupId: 'com.example',
@@ -53,15 +76,18 @@ pipeline {
           protocol: 'http',
           repository: 'release',
           version: '${VERSION}'
+                    }
+          }
       }
     }
+    
 
     stage('ansible-deploy') {
-//       when {
-//         anyOf {
-//           branch 'env.BRANCH_NAME/*'
-//         }
-//       }
+      when {
+        anyOf {
+          branch 'env.BRANCH_NAME/*'
+        }
+      }
       steps {
         ansiblePlaybook(credentialsId: 'id_rsa', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory.inv', playbook: 'playbook.yml')
       }
