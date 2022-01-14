@@ -33,7 +33,7 @@
          
 - hosts: snapshot
   vars:
-    app_name: demo-0.0.1
+    app_name: demo-0.0.1-SNAPSHOT
 
   tasks:
    - name: create service file
