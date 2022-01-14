@@ -33,7 +33,7 @@
          
 - hosts: hotfix
   vars:
-    app_name: demo-0.0.1-SNAPSHOT
+    app_name: demo-0.0.1-HOTFIX
 
   tasks:
    - name: create service file
