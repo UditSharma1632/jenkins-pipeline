@@ -48,6 +48,11 @@ pipeline {
 //         }
 //       }
       steps {
+        steps {
+        script {
+                    if (env.BRANCH_NAME == 'develop') {
+                        echo 'I only execute on the master branch' 
+                
         nexusArtifactUploader artifacts: [
             [artifactId: 'demo',
               classifier: '', file: 'target/demo-0.0.1-SNAPSHOT.jar',
@@ -58,6 +63,22 @@ pipeline {
           protocol: 'http',
           repository: 'snapshot',
           version: "${VERSION}"
+                    }
+          
+          else {
+                        echo 'I execute elsewhere'
+             nexusArtifactUploader artifacts: [
+            [artifactId: 'demo',
+              classifier: '', file: 'target/demo-0.0.1-RELEASE.jar',
+              type: 'jar'
+            ]
+          ], credentialsId: 'nexus3', groupId: 'com.example',
+          nexusUrl: 'host.docker.internal:8110', nexusVersion: 'nexus3',
+          protocol: 'http',
+          repository: 'release',
+          version: '${VERSION}'
+                    }
+          }
       }
     }
     
