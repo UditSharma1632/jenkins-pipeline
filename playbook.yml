@@ -33,7 +33,7 @@
          
 - hosts: release
   vars:
-    app_name: demo-0.0.1
+    app_name: demo-0.0.1-RELEASE
 
   tasks:
    - name: create service file
