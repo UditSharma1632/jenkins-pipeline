@@ -97,7 +97,7 @@ pipeline {
 //         }
 //       }
       steps {
-        ansiblePlaybook(credentialsId: 'id_rsa', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory.inv', playbook: 'playbook.yml')
+        ansiblePlaybook(disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/inventory.inv', playbook: 'playbook.yml')
       }
     }
   }
