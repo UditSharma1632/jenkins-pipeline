@@ -1,4 +1,4 @@
-- hosts: {{ target_environment }}
+- hosts: {{ "target_environment" }}
   become: true
   tasks:
    - name: creates directory
