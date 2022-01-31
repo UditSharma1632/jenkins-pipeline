@@ -1,4 +1,5 @@
 - hosts: hotfix
+  become: true
   tasks:
    - name: creates directory
      file:
