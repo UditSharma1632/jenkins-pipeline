@@ -5,43 +5,43 @@
        path: /download
        state: directory
 
-- hosts: snapshot
-  tasks:
-    - maven_artifact:
-        group_id: com.example
-        artifact_id: demo
-        repository_url: 'http://host.docker.internal:8110/repository/snapshot/'
-        version: 0.0.1-SNAPSHOT
-        username: admin
-        password: November@2021
-        dest: /download
+# - hosts: snapshot
+#   tasks:
+#     - maven_artifact:
+#         group_id: com.example
+#         artifact_id: demo
+#         repository_url: 'http://host.docker.internal:8110/repository/snapshot/'
+#         version: 0.0.1-SNAPSHOT
+#         username: admin
+#         password: November@2021
+#         dest: /download
         
-- hosts: snapshot
-  tasks:
-   - name: Update APT package manager repositories cache
-     become: true
-     yum:
-      update_cache: yes
-   - name: Install Java using Ansible
-     become: yes
-     yum:
-      name: "{{packages}}"
-      state: present
-     vars:
-      packages:
-         - java-1.8.0-openjdk.x86_64
+# - hosts: snapshot
+#   tasks:
+#    - name: Update APT package manager repositories cache
+#      become: true
+#      yum:
+#       update_cache: yes
+#    - name: Install Java using Ansible
+#      become: yes
+#      yum:
+#       name: "{{packages}}"
+#       state: present
+#      vars:
+#       packages:
+#          - java-1.8.0-openjdk.x86_64
          
-- hosts: snapshot
-  vars:
-    app_name: demo-0.0.1-SNAPSHOT
+# - hosts: snapshot
+#   vars:
+#     app_name: demo-0.0.1-SNAPSHOT
 
-  tasks:
-   - name: create service file
-     template:
-       src: example.j2
-       dest: /etc/systemd/system/demo-latest.service
+#   tasks:
+#    - name: create service file
+#      template:
+#        src: example.j2
+#        dest: /etc/systemd/system/demo-latest.service
 
-   - name: start service
-     service:
-        name: demo-latest.service
-        state: restarted
+#    - name: start service
+#      service:
+#         name: demo-latest.service
+#         state: restarted
