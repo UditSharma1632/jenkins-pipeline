@@ -1,4 +1,5 @@
 - hosts: snapshot
+  ansible_user: ec2-user
   tasks:
    - name: creates directory
      file:
