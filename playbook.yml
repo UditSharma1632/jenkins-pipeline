@@ -1,4 +1,5 @@
-- hosts: snapshot
+- hosts: {{ target_environment }}
+  become: true
   tasks:
    - name: creates directory
      file:

@@ -91,13 +91,21 @@ pipeline {
     }
 
     stage('ansible-deploy') {
-//       when {
-//         anyOf {
-//           branch 'env.BRANCH_NAME/*'
-//         }
-//       }
+      when {
+        not {
+          branch 'master'
+        }
+      }
       steps {
-        ansiblePlaybook(disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/inventory.inv', playbook: 'playbook.yml')
+        script {
+          if (env.BRANCH_NAME == 'develop') {
+            ansiblePlaybook(
+              disableHostKeyChecking: true,
+              installation: 'ansible',
+              inventory: 'inventory/inventory.inv',
+              playbook: 'playbook.yml',
+              extras: '-e target_environment=dev' )
+        }
       }
     }
   }
