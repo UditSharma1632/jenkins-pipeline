@@ -5,8 +5,8 @@ ansible_user=ec2-user
 172.17.0.2
 
 [snapshot]
-52.66.50.8 ansible_ssh_private_key=./secrets/dev_aws_mum.pem
-15.206.82.87 ansible_ssh_private_key=./secrets/test_aws_mum.pem
+52.66.50.8 ansible_ssh_private_key_file=secrets/dev_aws_mum.pem
+15.206.82.87 ansible_ssh_private_key_file=secrets/test_aws_mum.pem
 
 [release]
 172.17.0.6
