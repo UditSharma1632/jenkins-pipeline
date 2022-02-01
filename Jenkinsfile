@@ -19,33 +19,33 @@ pipeline {
     }
 
     stage('Build') {
-            when {
-              anyOf {
-                branch 'env.BRANCH_NAME/*'
-              }
-            }
+//             when {
+//               anyOf {
+//                 branch 'env.BRANCH_NAME/*'
+//               }
+//             }
       steps {
         sh "mvn clean test"
       }
     }
 
     stage('Package') {
-            when {
-              anyOf {
-                branch 'env.BRANCH_NAME/*'
-              }
-            }
+//             when {
+//               anyOf {
+//                 branch 'env.BRANCH_NAME/*'
+//               }
+//             }
       steps {
         sh "mvn package"
       }
     }
 
     stage('Nexus') {
-            when {
-              anyOf {
-                branch 'env.BRANCH_NAME/*'
-              }
-            }
+//             when {
+//               anyOf {
+//                 branch 'env.BRANCH_NAME/*'
+//               }
+//             }
       steps {
         script {
           if (env.BRANCH_NAME == 'develop') {
@@ -92,11 +92,11 @@ pipeline {
     }
 
   stage('ansible-deploy') {
-      when {
-        not {
-          branch 'master'
-        }
-      }
+//       when {
+//         not {
+//           branch 'master'
+//         }
+//       }
       steps {
         script {
           if (env.BRANCH_NAME == 'develop') {
