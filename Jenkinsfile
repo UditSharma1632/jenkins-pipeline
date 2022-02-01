@@ -90,7 +90,7 @@ pipeline {
       }
     }
 
-    stage('ansible-deploy') {
+  stage('ansible-deploy') {
       when {
         not {
           branch 'master'
@@ -105,6 +105,25 @@ pipeline {
               inventory: 'inventory/inventory.inv',
               playbook: 'playbook.yml',
               extras: '-e target_environment=dev' )
+        }
+        else{
+if (env.BRANCH_NAME == 'hotfix') {
+            ansiblePlaybook(
+              disableHostKeyChecking: true,
+              installation: 'ansible',
+              inventory: 'inventory/inventory.inv',
+              playbook: 'playbook.yml',
+              extras: '-e target_environment=hotfix' )
+        }
+        else{
+         siblePlaybook(
+              disableHostKeyChecking: true,
+              installation: 'ansible',
+              inventory: 'inventory/inventory.inv',
+              playbook: 'playbook.yml',
+              extras: '-e target_environment=release' ) 
+        }
+          
         }
       }
     }
