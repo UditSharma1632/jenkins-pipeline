@@ -18,33 +18,33 @@ pipeline {
     }
 
     stage('Build') {
-      //       when {
-      //         anyOf {
-      //           branch 'env.BRANCH_NAME/*'
-      //         }
-      //       }
+            when {
+              anyOf {
+                branch 'env.BRANCH_NAME/*'
+              }
+            }
       steps {
         sh "mvn clean test"
       }
     }
 
     stage('Package') {
-      //       when {
-      //         anyOf {
-      //           branch 'env.BRANCH_NAME/*'
-      //         }
-      //       }
+            when {
+              anyOf {
+                branch 'env.BRANCH_NAME/*'
+              }
+            }
       steps {
         sh "mvn package"
       }
     }
 
     stage('Nexus') {
-      //       when {
-      //         anyOf {
-      //           branch 'env.BRANCH_NAME/*'
-      //         }
-      //       }
+            when {
+              anyOf {
+                branch 'env.BRANCH_NAME/*'
+              }
+            }
       steps {
         script {
           if (env.BRANCH_NAME == 'develop') {
@@ -116,7 +116,7 @@ if (env.BRANCH_NAME == 'hotfix') {
               extras: '-e target_environment=hotfix' )
         }
         else{
-         siblePlaybook(
+         ansiblePlaybook(
               disableHostKeyChecking: true,
               installation: 'ansible',
               inventory: 'inventory/inventory.inv',
