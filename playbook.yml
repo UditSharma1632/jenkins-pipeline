@@ -6,7 +6,7 @@
        path: /download
        state: directory
 
-- hosts: snapshot
+- hosts: "{{ target_environment }}"
   tasks:
     - maven_artifact:
         group_id: com.example
@@ -17,7 +17,7 @@
         password: November@2021
         dest: /download
         
-- hosts: snapshot
+- hosts: "{{ target_environment }}"
   tasks:
    - name: Update APT package manager repositories cache
      become: true
@@ -32,7 +32,7 @@
       packages:
          - java-1.8.0-openjdk.x86_64
          
-- hosts: snapshot
+- hosts: "{{ target_environment }}"
   vars:
     app_name: demo-0.0.1-SNAPSHOT
 
