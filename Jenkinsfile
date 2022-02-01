@@ -57,7 +57,7 @@ pipeline {
                   type: 'jar'
                 ]
               ], credentialsId: 'nexus3', groupId: 'com.example',
-              nexusUrl: 'localhost:8110', nexusVersion: 'nexus3',
+              nexusUrl: 'localhost:8081', nexusVersion: 'nexus3',
               protocol: 'http',
               repository: 'snapshot',
               version: "${VERSION}"
@@ -70,7 +70,7 @@ pipeline {
                     type: 'jar'
                   ]
                 ], credentialsId: 'nexus3', groupId: 'com.example',
-                nexusUrl: 'localhost:8110', nexusVersion: 'nexus3',
+                nexusUrl: 'localhost:8081', nexusVersion: 'nexus3',
                 protocol: 'http',
                 repository: 'release',
                 version: "${VERSION}"
@@ -81,7 +81,7 @@ pipeline {
                     type: 'jar'
                   ]
                 ], credentialsId: 'nexus3', groupId: 'com.example',
-                nexusUrl: 'localhost:8110', nexusVersion: 'nexus3',
+                nexusUrl: 'localhost:8081', nexusVersion: 'nexus3',
                 protocol: 'http',
                 repository: 'hotfix',
                 version: "${VERSION}"
