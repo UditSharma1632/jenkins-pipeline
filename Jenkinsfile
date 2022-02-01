@@ -14,6 +14,7 @@ pipeline {
       steps {
         git branch: env.BRANCH_NAME,
           url: 'https://github.com/UditSharma1632/pipeline.git'
+        echo "${env.BRANCH_NAME}"
       }
     }
 
