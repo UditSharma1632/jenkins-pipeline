@@ -9,7 +9,7 @@ pipeline {
       when {
         not {
          anyOf{
-            branch 'master',
+            branch 'master';
             branch 'feature/*'
           }
         }
@@ -25,7 +25,7 @@ pipeline {
             when {
               not {
                 anyOf{
-                    branch 'master',
+                    branch 'master';
                     branch 'feature/*'
           }
         }
@@ -39,7 +39,7 @@ pipeline {
             when {
               not {
                 anyOf{
-                    branch 'master',
+                    branch 'master';
                     branch 'feature/*'
           }
         }
@@ -53,7 +53,7 @@ pipeline {
             when {
               not {
                 anyOf{
-                    branch 'master',
+                    branch 'master';
                     branch 'feature/*'
           }
         }
@@ -107,7 +107,7 @@ pipeline {
       when {
               not {
                 anyOf{
-                    branch 'master',
+                    branch 'master';
                     branch 'feature/*'
           }
         }
