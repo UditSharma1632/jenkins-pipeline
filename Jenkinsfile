@@ -73,8 +73,7 @@ pipeline {
               protocol: 'http',
               repository: 'snapshot',
               version: "${VERSION}"
-          } else {
-            if (env.BRANCH_NAME == 'release') {
+          } else if(env.BRANCH_NAME == 'release') {
               echo 'I execute elsewhere'
               nexusArtifactUploader artifacts: [
                   [artifactId: 'demo',
@@ -122,8 +121,7 @@ pipeline {
               playbook: 'playbook.yml',
               extras: '-e target_environment=dev' )
         }
-        else{
-if (env.BRANCH_NAME == 'hotfix') {
+        else if(env.BRANCH_NAME == 'hotfix') {
             ansiblePlaybook(
               disableHostKeyChecking: true,
               installation: 'ansible',
