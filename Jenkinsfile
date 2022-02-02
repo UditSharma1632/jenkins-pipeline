@@ -20,8 +20,7 @@ pipeline {
         echo "${env.BRANCH_NAME}"
       }
     }
-
-    stage('Build') {
+    stage('Clean test and package') {
             when {
               not {
                 anyOf{
@@ -31,25 +30,11 @@ pipeline {
         }
       }
       steps {
-        sh "mvn clean test"
+        sh "mvn clean package"
       }
     }
 
-    stage('Package') {
-            when {
-              not {
-                anyOf{
-                    branch 'master';
-                    branch 'feature/*'
-          }
-        }
-      }
-      steps {
-        sh "mvn package"
-      }
-    }
-
-    stage('Nexus') {
+    stage('Upload to repository') {
             when {
               not {
                 anyOf{
@@ -102,7 +87,7 @@ pipeline {
       
     }
 
-  stage('ansible-deploy') {
+  stage('Deploy to target environment') {
       when {
               not {
                 anyOf{
