@@ -8,43 +8,41 @@ pipeline {
     stage('Git-checkout') { // for display purpose
       when {
         not {
-          branch 'master'
+         anyOf{
+            branch 'master';
+            branch 'feature/*'
+          }
         }
       }
       steps {
         git branch: env.BRANCH_NAME,
           url: 'https://github.com/UditSharma1632/pipeline.git'
+        echo "${env.BRANCH_NAME}"
       }
     }
-
-    stage('Build') {
-      //       when {
-      //         anyOf {
-      //           branch 'env.BRANCH_NAME/*'
-      //         }
-      //       }
+    stage('Clean test and package') {
+            when {
+              not {
+                anyOf{
+                    branch 'master';
+                    branch 'feature/*'
+          }
+        }
+      }
       steps {
-        sh "mvn clean test"
+        sh "mvn clean package"
       }
     }
 
-    stage('Package') {
-      //       when {
-      //         anyOf {
-      //           branch 'env.BRANCH_NAME/*'
-      //         }
-      //       }
-      steps {
-        sh "mvn package"
+    stage('Upload to repository') {
+            when {
+              not {
+                anyOf{
+                    branch 'master';
+                    branch 'feature/*'
+          }
+        }
       }
-    }
-
-    stage('Nexus') {
-      //       when {
-      //         anyOf {
-      //           branch 'env.BRANCH_NAME/*'
-      //         }
-      //       }
       steps {
         script {
           if (env.BRANCH_NAME == 'develop') {
@@ -60,8 +58,7 @@ pipeline {
               protocol: 'http',
               repository: 'snapshot',
               version: "${VERSION}"
-          } else {
-            if (env.BRANCH_NAME == 'release') {
+          } else if(env.BRANCH_NAME == 'release') {
               echo 'I execute elsewhere'
               nexusArtifactUploader artifacts: [
                   [artifactId: 'demo',
@@ -87,17 +84,46 @@ pipeline {
             }
           }
         }
-      }
+      
     }
 
-    stage('ansible-deploy') {
-//       when {
-//         anyOf {
-//           branch 'env.BRANCH_NAME/*'
-//         }
-//       }
+  stage('Deploy to target environment') {
+      when {
+              not {
+                anyOf{
+                    branch 'master';
+                    branch 'feature/*'
+          }
+        }
+      }
       steps {
-        ansiblePlaybook(credentialsId: 'id_rsa', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory.inv', playbook: 'playbook.yml')
+        script {
+          if (env.BRANCH_NAME == 'develop') {
+            ansiblePlaybook(
+              disableHostKeyChecking: true,
+              installation: 'ansible',
+              inventory: 'inventory/inventory.inv',
+              playbook: 'playbook.yml',
+              extras: '-e target_environment=dev' )
+        }
+        else if(env.BRANCH_NAME == 'hotfix') {
+            ansiblePlaybook(
+              disableHostKeyChecking: true,
+              installation: 'ansible',
+              inventory: 'inventory/inventory.inv',
+              playbook: 'playbook.yml',
+              extras: '-e target_environment=hotfix' )
+        }
+        else{
+         ansiblePlaybook(
+              disableHostKeyChecking: true,
+              installation: 'ansible',
+              inventory: 'inventory/inventory.inv',
+              playbook: 'playbook.yml',
+              extras: '-e target_environment=release' ) 
+        }
+          
+        }
       }
     }
   }
