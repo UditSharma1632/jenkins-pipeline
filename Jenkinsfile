@@ -99,7 +99,7 @@ pipeline {
             }
           }
         }
-      }
+      
     }
 
   stage('ansible-deploy') {
