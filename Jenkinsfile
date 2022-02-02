@@ -8,7 +8,10 @@ pipeline {
     stage('Git-checkout') { // for display purpose
       when {
         not {
-          branch 'master'
+         anyOf{
+            branch 'master',
+            branch 'feature/*'
+          }
         }
       }
       steps {
@@ -19,33 +22,42 @@ pipeline {
     }
 
     stage('Build') {
-//             when {
-//               anyOf {
-//                 branch 'env.BRANCH_NAME/*'
-//               }
-//             }
+            when {
+              not {
+                anyOf{
+                    branch 'master',
+                    branch 'feature/*'
+          }
+        }
+      }
       steps {
         sh "mvn clean test"
       }
     }
 
     stage('Package') {
-//             when {
-//               anyOf {
-//                 branch 'env.BRANCH_NAME/*'
-//               }
-//             }
+            when {
+              not {
+                anyOf{
+                    branch 'master',
+                    branch 'feature/*'
+          }
+        }
+      }
       steps {
         sh "mvn package"
       }
     }
 
     stage('Nexus') {
-//             when {
-//               anyOf {
-//                 branch 'env.BRANCH_NAME/*'
-//               }
-//             }
+            when {
+              not {
+                anyOf{
+                    branch 'master',
+                    branch 'feature/*'
+          }
+        }
+      }
       steps {
         script {
           if (env.BRANCH_NAME == 'develop') {
@@ -92,11 +104,14 @@ pipeline {
     }
 
   stage('ansible-deploy') {
-//       when {
-//         not {
-//           branch 'master'
-//         }
-//       }
+      when {
+              not {
+                anyOf{
+                    branch 'master',
+                    branch 'feature/*'
+          }
+        }
+      }
       steps {
         script {
           if (env.BRANCH_NAME == 'develop') {
